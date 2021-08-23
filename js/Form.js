@@ -32,26 +32,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         try{
             (new EmployeePayrollData()).startDate = new Date(parseInt(year), parseInt(month), parseInt(day));
             dateError.textContent = "";
-            console.log(day, month, year);
         }
         catch(e){
             dateError.textContent = "Invalid Date";
         }
     });
 });
-
-function save(){
-    let employee = new EmployeePayrollData();
-    employee.name = document.getElementById("name").value;
-    employee.profilePic = document.querySelector('input[name = profile] : checked').value;
-    employee.gender = document.querySelector('input[name = gender] : checked').value;
-    employee.department = document.querySelector('input[name = department] : checked').value;
-    employee.salary = document.getElementById("salary").value;
-    let day = document.getElementById("day").value;
-    let month = document.getElementById("month").value;
-    let year = document.getElementById('year').value;
-    employee.startDate = new Date(parseInt(year),parseInt(month),parseInt(day));
-    employee.note = document.getElementById("notes").value;
-
-    alert("Your data is successfully added!" + employee.toString());
-}
