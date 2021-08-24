@@ -121,7 +121,7 @@ label{
     margin-left: 12px;
 }
 
-.select{
+select{
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -167,11 +167,6 @@ label{
 .cancelButton{
     text-decoration: none;
     text-align: center;
-    background: #E2E2E2 0% 0% no-repeat padding-box;
-    border: 1px solid #969696;
-    border-radius: 5px;
-    opacity: 1;
-    
 }
 
 .resetButton{
@@ -183,6 +178,7 @@ label{
 }
 
 error-output{
+    margin-left: 10px;
     font-size: 12px;
     font-style: italic;
     color: red;
@@ -226,5 +222,7 @@ error-output{
     .submitButton{
         margin: 0;
     }
-
+    .profile-radio-content{
+        flex-flow: wrap;
+    }
 }
