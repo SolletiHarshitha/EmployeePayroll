@@ -4,7 +4,7 @@ class EmployeePayrollData{
     
     get name() { return this._name; }
     set name(name) { 
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
+        let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
         if(nameRegex.test(name))
         this._name=name;
         else
@@ -18,7 +18,7 @@ class EmployeePayrollData{
     set gender(gender){ this._gender = gender; }
 
     get department() { return this._department; }
-    set department(department){ this._department = this.department; }
+    set department(department){ this._department = department; }
 
     get salary() { return this._salary; }
     set salary(salary){ this._salary = salary; }

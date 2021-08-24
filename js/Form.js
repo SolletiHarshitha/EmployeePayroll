@@ -23,18 +23,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
     output.textContent = salary.value;
     });
 
-    const startDate = document.querySelector("#startDate");
-    const day = document.getElementById("day").value;
-    const month = document.getElementById("month").value;
-    const year = document.getElementById("year").value;
-    const dateError = document.querySelector(".date-error");
-    startDate.addEventListener('input', async function(){
-        try{
-            (new EmployeePayrollData()).startDate = new Date(parseInt(year), parseInt(month), parseInt(day));
-            dateError.textContent = "";
+    const date = document.querySelector('#startDate');
+    date.addEventListener('input', function () {
+        let startDate = getInputValueById('#day') + " " + getInputValueById('#month') + " " + getInputValueById('#year');
+        try {
+            (new EmployeePayrollData()).startDate = new Date(Date.parse(startDate));
+            setTextValue('.date-error', "");
         }
-        catch(e){
-            dateError.textContent = "Invalid Date";
+        catch (e) {
+            setTextValue('.date-error', e);
         }
     });
 });
