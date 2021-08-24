@@ -1,7 +1,6 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     const name = document.querySelector("#name");
     const textError = document.querySelector(".text-error");
-    const nameRegex = RegExp("^[A-Z]{1}[a-z]{2,}$");
     name.addEventListener('input', function(){
         if(name.value.length == 0){
             textError.textContent = "";
@@ -23,18 +22,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
     output.textContent = salary.value;
     });
 
-    const startDate = document.querySelector("#startDate");
-    const day = document.getElementById("day").value;
-    const month = document.getElementById("month").value;
-    const year = document.getElementById("year").value;
-    const dateError = document.querySelector(".date-error");
-    startDate.addEventListener('input', async function(){
-        try{
-            (new EmployeePayrollData()).startDate = new Date(parseInt(year), parseInt(month), parseInt(day));
-            dateError.textContent = "";
+    const date = document.querySelector('#startDate');
+    date.addEventListener('input', function () {
+        let startDate = getInputValueById('#day') + " " + getInputValueById('#month') + " " + getInputValueById('#year');
+        try {
+            (new EmployeePayrollData()).startDate = new Date(Date.parse(startDate));
+            setTextValue('.date-error', "");
         }
-        catch(e){
-            dateError.textContent = "Invalid Date";
+        catch (e) {
+            setTextValue('.date-error', e);
         }
     });
 });
@@ -62,8 +58,14 @@ const createEmployeePayroll = () => {
     employeePayrollData.department = getSelectedValues('[name=department]');
     employeePayrollData.salary = getInputValueById('#salary');
     employeePayrollData.note = getInputValueById('#notes');
-    let date = getInputValueById('#day')+" "+getInputValueById('#month')+" "+getInputValueById('#year');
-    employeePayrollData.date = Date.parse(date);
+    let date = getInputValueById("#day") + " " + getInputValueById("#month") + " " + getInputValueById("#year");
+    try {
+        employeePayrollData.startDate = new Date(Date.parse(date));
+    }
+    catch (e) {
+        setTextValue('.date-error', e);
+        throw e;
+    }
     alert(employeePayrollData.toString());
     return employeePayrollData;
 }
@@ -78,7 +80,7 @@ const getSelectedValues = (propertyValue) => {
 }
 
 const getInputValueById = (id) => {
-    let value = document.querySelectorAll(id).value;
+    let value = document.querySelector(id).value;
     return value;
 }
 
@@ -105,14 +107,14 @@ function createAndUpdateStorage(employeePayrollData) {
 
 const resetForm = () => {
     setValue('#name','');
-    unsetSelectedValues('[name=proifile]');
+    unsetSelectedValues('[name=profile]');
     unsetSelectedValues('[name=gender]');
     unsetSelectedValues('[name=department]');
     setValue('#salary','');
     setValue('#notes','');
     setValue('#day','1');
     setValue('#month','January');
-    setValue('#year','2020');
+    setValue('#year','2021');
 }
 
 const setValue = (id,value) => {
