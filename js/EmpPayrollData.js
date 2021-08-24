@@ -25,14 +25,10 @@ class EmployeePayrollData{
 
     get startDate() { return this._startDate; }
     set startDate(startDate){ 
-        let date = new Date();
-        date.setMonth(date.getMonth() - 1);
-        if(startDate > new Date())
-        throw "It's a future date";
-        else if(date > startDate)
-        throw "Date should be within 30 days";
-        else
+        if(startDate <= new Date())
         this._startDate = startDate;
+        else
+        throw "Enter Valid Date";
     }
 
     get note() { return this._note; }
