@@ -4,7 +4,7 @@ class EmployeePayrollData{
     
     get name() { return this._name; }
     set name(name) { 
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
+        let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
         if(nameRegex.test(name))
         this._name=name;
         else
@@ -18,17 +18,21 @@ class EmployeePayrollData{
     set gender(gender){ this._gender = gender; }
 
     get department() { return this._department; }
-    set department(department){ this._department = this.department; }
+    set department(department){ this._department = department; }
 
     get salary() { return this._salary; }
     set salary(salary){ this._salary = salary; }
 
     get startDate() { return this._startDate; }
     set startDate(startDate){ 
-        if(startDate <= new Date())
-        this._startDate = startDate;
+        let date = new Date();
+        date.setMonth(date.getMonth() - 1);
+        if(startDate > new Date())
+        throw "It's a future date";
+        else if(date > startDate)
+        throw "Date should be within 30 days";
         else
-        throw "Enter Valid Date";
+        this._startDate = startDate;
     }
 
     get note() { return this._note; }
@@ -37,9 +41,9 @@ class EmployeePayrollData{
     toString() {
         const options = { year : 'numeric', month : 'long', day : 'numeric'};
         const empDate = !this.startDate ? "undefined" : 
-                        this.startDate.toLocaleDateString("en-US",options);
+                        this.startDate.toLocaleDateString("en-GB",options);
         return "id=" + this.id + ", name=" + this.name + ", gender=" + this.gender + 
                 ", profilePic=" + this.profilePic + ", department=" + this.department + 
-                ", salary=" + this.salary + ", startDate=" + this.empDate + ", note=" + this.note;
+                ", salary=" + this.salary + ", startDate=" + empDate + ", note=" + this.note;
     }
 }
