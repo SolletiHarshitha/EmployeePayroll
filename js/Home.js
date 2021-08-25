@@ -22,5 +22,5 @@ const createInnerHtml = () => {
         </td>
     </tr>
     `;
-    document.querySelector('#table-display').innerHTML = innerHtml;
+    document.querySelector('#display').innerHTML = innerHtml;
 }
