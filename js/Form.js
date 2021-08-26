@@ -130,3 +130,25 @@ const unsetSelectedValues = (propertyValue) =>{
         item.checked = false;
     });
 }
+
+const checkForUpdate = () => {
+    const employeePayrollJson = localStorage.getItem('editEmp');
+    isUpdate = employeePayrollJson ? true : false;
+    if(!isUpdate) return;
+    employeePayrollObj = JSON.parse(employeePayrollJson);
+    setForm();
+}
+
+const setSelectedValues = (propertyValue, value) => {
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item => {
+        if(Array.isArray(value)) {
+            if(value.includes(item.value)) {
+                item.checked = true;
+            }
+        }
+        else if(item.value === value){
+            item.checked = true;
+        }
+    });
+}
